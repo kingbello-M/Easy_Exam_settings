@@ -65,7 +65,10 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero section" id="home">
-        <div class="container hero-grid">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <div class="container hero-center">
             <div class="hero-content reveal">
                 <span class="hero-badge">
                     <span class="badge-pulse"></span>
@@ -79,54 +82,51 @@
                 </p>
                 <div class="hero-actions">
                     <a href="login.html" class="btn btn-primary btn-lg shine" data-i18n="hero_cta">Get Started Free</a>
-                    <a href="#how" class="btn btn-ghost btn-lg" data-i18n="hero_cta2">See How It Works</a>
+                    <a href="#how" class="btn btn-glass btn-lg" data-i18n="hero_cta2">See How It Works</a>
                 </div>
+            </div>
 
-                <div class="hero-trust">
-                    <div class="avatars">
-                        <span class="avatar a1">AD</span>
-                        <span class="avatar a2">ML</span>
-                        <span class="avatar a3">SK</span>
-                        <span class="avatar a4">+</span>
+            <!-- Repositioned picture: product window mockup -->
+            <div class="hero-window reveal">
+                <div class="win-bar">
+                    <span class="win-dot r"></span>
+                    <span class="win-dot y"></span>
+                    <span class="win-dot g"></span>
+                    <span class="win-title" data-i18n="hero_win">BELLO · Live Dashboard</span>
+                </div>
+                <div class="win-body">
+                    <img src="./assets/ChatGPT Image Aug 29, 2026, 01_30_16 PM.png" alt="BELLO AI Exam Platform" class="win-img">
+                    <div class="win-float-card wf-1">
+                        <span class="fc-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        <div><strong data-i18n="fc1_t">Exam Auto-Graded</strong><span data-i18n="fc1_d">AI finished in 0.3s</span></div>
                     </div>
-                    <div class="trust-text">
-                        <div class="stars">★★★★★</div>
-                        <span data-i18n="trust_text">Trusted by 500+ educators worldwide</span>
+                    <div class="win-float-card wf-2">
+                        <span class="fc-icon warn-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </span>
+                        <div><strong data-i18n="fc2_t">New Message</strong><span data-i18n="fc2_d">From your teacher</span></div>
+                    </div>
+                    <div class="win-float-card wf-3">
+                        <span class="fc-icon success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </span>
+                        <div><strong data-i18n="fc3_t">100% Secure</strong><span data-i18n="fc3_d">Anti-cheat enabled</span></div>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-visual reveal">
-                <div class="hero-image-frame">
-                    <div class="hero-img-glow"></div>
-                    <img src="./assets/AiBlW (1).jpg" alt="BELLO AI Exam Platform" class="hero-img">
-                    <div class="hero-float-card fc-1">
-                        <span class="fc-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <div>
-                            <strong data-i18n="fc1_t">Exam Auto-Graded</strong>
-                            <span data-i18n="fc1_d">AI finished in 0.3s</span>
-                        </div>
-                    </div>
-                    <div class="hero-float-card fc-2">
-                        <span class="fc-icon warn-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        </span>
-                        <div>
-                            <strong data-i18n="fc2_t">New Message</strong>
-                            <span data-i18n="fc2_d">From your teacher</span>
-                        </div>
-                    </div>
-                    <div class="hero-float-card fc-3">
-                        <span class="fc-icon success-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        </span>
-                        <div>
-                            <strong data-i18n="fc3_t">100% Secure</strong>
-                            <span data-i18n="fc3_d">Anti-cheat enabled</span>
-                        </div>
-                    </div>
+            <div class="hero-trust reveal">
+                <div class="avatars">
+                    <span class="avatar a1">AD</span>
+                    <span class="avatar a2">ML</span>
+                    <span class="avatar a3">SK</span>
+                    <span class="avatar a4">+</span>
+                </div>
+                <div class="trust-text">
+                    <div class="stars">★★★★★</div>
+                    <span data-i18n="trust_text">Trusted by 500+ educators worldwide</span>
                 </div>
             </div>
         </div>
