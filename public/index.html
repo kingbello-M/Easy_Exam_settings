@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BELLO — The AI-Powered Teacher Portal & Exam Management System. Create exams, auto-grade with AI, chat with students, and deliver instant feedback.">
+    <title>BELLO · AI Exam Management Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="#home" class="brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                        <path d="M12 2 2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <span class="brand-name">BELLO</span>
+            </a>
+
+            <nav class="nav-links" id="nav-links">
+                <a href="#home" data-i18n="nav_home">Home</a>
+                <a href="#features" data-i18n="nav_features">Features</a>
+                <a href="#services" data-i18n="nav_services">Services</a>
+                <a href="#how" data-i18n="nav_how">How it works</a>
+                <a href="#about" data-i18n="nav_about">About</a>
+                <a href="#contact" data-i18n="nav_contact">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="lang-switcher" aria-label="Language switcher">
+                    <button class="lang-btn active" data-lang="en" title="English">EN</button>
+                    <span class="lang-divider"></span>
+                    <button class="lang-btn" data-lang="fr" title="Français">FR</button>
+                </div>
+
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+
+                <a href="login.html" class="btn btn-primary btn-sm" data-i18n="nav_login">Sign In</a>
+
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="24" height="24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero section" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content reveal">
+                <span class="hero-badge">
+                    <span class="badge-pulse"></span>
+                    <span data-i18n="hero_badge">Powered by Artificial Intelligence</span>
+                </span>
+                <h1 class="hero-title" data-i18n="hero_title">
+                    The Smarter Way to <span class="gradient-text">Manage</span> &amp; <span class="gradient-text">Grade</span> Exams
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
+                    BELLO is an AI-powered exam management platform for educators. Create exams, enroll students, chat with your class, and let artificial intelligence grade every answer with instant, personalized feedback.
+                </p>
+                <div class="hero-actions">
+                    <a href="login.html" class="btn btn-primary btn-lg shine" data-i18n="hero_cta">Get Started Free</a>
+                    <a href="#how" class="btn btn-ghost btn-lg" data-i18n="hero_cta2">See How It Works</a>
+                </div>
+
+                <div class="hero-trust">
+                    <div class="avatars">
+                        <span class="avatar a1">AD</span>
+                        <span class="avatar a2">ML</span>
+                        <span class="avatar a3">SK</span>
+                        <span class="avatar a4">+</span>
+                    </div>
+                    <div class="trust-text">
+                        <div class="stars">★★★★★</div>
+                        <span data-i18n="trust_text">Trusted by 500+ educators worldwide</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal">
+                <div class="hero-image-frame">
+                    <div class="hero-img-glow"></div>
+                    <img src="./assets/AiBlW (1).jpg" alt="BELLO AI Exam Platform" class="hero-img">
+                    <div class="hero-float-card fc-1">
+                        <span class="fc-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        <div>
+                            <strong data-i18n="fc1_t">Exam Auto-Graded</strong>
+                            <span data-i18n="fc1_d">AI finished in 0.3s</span>
+                        </div>
+                    </div>
+                    <div class="hero-float-card fc-2">
+                        <span class="fc-icon warn-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </span>
+                        <div>
+                            <strong data-i18n="fc2_t">New Message</strong>
+                            <span data-i18n="fc2_d">From your teacher</span>
+                        </div>
+                    </div>
+                    <div class="hero-float-card fc-3">
+                        <span class="fc-icon success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </span>
+                        <div>
+                            <strong data-i18n="fc3_t">100% Secure</strong>
+                            <span data-i18n="fc3_d">Anti-cheat enabled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee logos -->
+        <div class="container">
+            <div class="marquee" id="logo-marquee">
+                <p class="marquee-label" data-i18n="trusted_by">Trusted by leading institutions</p>
+                <div class="marquee-track">
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Harvard</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> EduTech</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> CampusPro</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Learnly</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> Gradely</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="6 12 10 16 18 8"/></svg> Scholar</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> BrightMind</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg> NovaAcad</span>
+                </div>
+                <div class="marquee-track" aria-hidden="true">
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Harvard</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> EduTech</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> CampusPro</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Learnly</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> Gradely</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="6 12 10 16 18 8"/></svg> Scholar</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> BrightMind</span>
+                    <span class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg> NovaAcad</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STATS BAND ===================== -->
+    <section class="stats-band">
+        <div class="container stats-grid">
+            <div class="stat-box reveal">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div>
+                    <div class="stat-bignum"><span data-count="12000">0</span>+</div>
+                    <span class="stat-caption" data-i18n="stat_exams">Exams graded</span>
+                </div>
+            </div>
+            <div class="stat-box reveal">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div>
+                    <div class="stat-bignum"><span data-count="8300">0</span>+</div>
+                    <span class="stat-caption" data-i18n="stat_institutions">Active students</span>
+                </div>
+            </div>
+            <div class="stat-box reveal">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                </div>
+                <div>
+                    <div class="stat-bignum"><span data-count="99">0</span>%</div>
+                    <span class="stat-caption" data-i18n="stat_accuracy">Grading accuracy</span>
+                </div>
+            </div>
+            <div class="stat-box reveal">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                    <div class="stat-bignum"><span data-count="60">0</span>s</div>
+                    <span class="stat-caption" data-i18n="stat_time">Avg. grade time</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FEATURES ===================== -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag" data-i18n="features_tag">Features</span>
+                <h2 class="section-title" data-i18n="features_title">Everything you need to run exams effortlessly</h2>
+                <p class="section-sub" data-i18n="features_sub">From exam creation to AI grading and student messaging, BELLO automates the entire assessment lifecycle.</p>
+            </div>
+
+            <div class="features-grid">
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    </div>
+                    <h3 data-i18n="f1_t">AI Auto-Grading</h3>
+                    <p data-i18n="f1_d">Structural and multiple-choice answers evaluated automatically by Google Gemini with rich diagnostic feedback for every student.</p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3 data-i18n="f2_t">Anti-Cheat Security</h3>
+                    <p data-i18n="f2_d">Automatic tab-switch monitoring, IP logging and suspicious-activity flags keep your exams fair and trustworthy.</p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3 data-i18n="f3_t">Student Management</h3>
+                    <p data-i18n="f3_d">Bulk-create student accounts, approve pending registrations, and control access all from one intuitive dashboard.</p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <h3 data-i18n="f4_t">Instant Results</h3>
+                    <p data-i18n="f4_d">Publish AI-evaluated results the moment exams close. Students see their scores and personalized feedback in real time.</p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg>
+                    </div>
+                    <h3 data-i18n="f5_t">Smart Messaging</h3>
+                    <p data-i18n="f5_d">Send announcements to all students or chat with individuals directly — built right into the platform.</p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    </div>
+                    <h3 data-i18n="f6_t">Exam Analytics</h3>
+                    <p data-i18n="f6_d">Track submission counts, publication status and performance at a glance with clean, actionable exam overviews.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="section section-alt" id="services">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag" data-i18n="services_tag">Services</span>
+                <h2 class="section-title" data-i18n="services_title">One platform, endless possibilities</h2>
+                <p class="section-sub" data-i18n="services_sub">Everything an educator needs, beautifully integrated.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-num">01</div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+                    </div>
+                    <h3 data-i18n="svc1_t">Exam Builder</h3>
+                    <p data-i18n="svc1_d">Design professional exams with unlimited questions, multiple-choice and structural types, and custom point values.</p>
+                    <a href="login.html" class="service-link" data-i18n="svc_more">Learn more →</a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-num">02</div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <h3 data-i18n="svc2_t">AI Grading Engine</h3>
+                    <p data-i18n="svc2_d">Google Gemini evaluates every answer in seconds, delivering fair scores and detailed, personalized feedback.</p>
+                    <a href="login.html" class="service-link" data-i18n="svc_more">Learn more →</a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-num">03</div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h3 data-i18n="svc3_t">Classroom Chat</h3>
+                    <p data-i18n="svc3_d">Broadcast announcements or send direct messages to individual students — instant, secure communication.</p>
+                    <a href="login.html" class="service-link" data-i18n="svc_more">Learn more →</a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-num">04</div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3 data-i18n="svc4_t">Real-time Analytics</h3>
+                    <p data-i18n="svc4_d">Live dashboards show results, submission status and class performance so you always know where you stand.</p>
+                    <a href="login.html" class="service-link" data-i18n="svc_more">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section class="section" id="how">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag" data-i18n="how_tag">How it works</span>
+                <h2 class="section-title" data-i18n="how_title">Three simple steps</h2>
+                <p class="section-sub" data-i18n="how_sub">Get your institution up and running in minutes.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step reveal">
+                    <div class="step-num">1</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    </div>
+                    <h3 data-i18n="s1_t">Create &amp; Enroll</h3>
+                    <p data-i18n="s1_d">Set up exams, manage question banks, and add students to your class with a single click.</p>
+                </div>
+                <div class="step-connector" aria-hidden="true"></div>
+                <div class="step reveal">
+                    <div class="step-num">2</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3 data-i18n="s2_t">Students Take Exams</h3>
+                    <p data-i18n="s2_d">Students log in and complete secure, monitored exams with automatic anti-cheat protection.</p>
+                </div>
+                <div class="step-connector" aria-hidden="true"></div>
+                <div class="step reveal">
+                    <div class="step-num">3</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <h3 data-i18n="s3_t">AI Grades &amp; Publishes</h3>
+                    <p data-i18n="s3_d">One click distributes results. Every answer is graded by AI and personalized feedback is delivered instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="section section-alt" id="about">
+        <div class="container about-grid">
+            <div class="about-content reveal">
+                <span class="section-tag" data-i18n="about_tag">About BELLO</span>
+                <h2 class="section-title left" data-i18n="about_title">Built for modern educators</h2>
+                <p data-i18n="about_p1">BELLO was created to free teachers from the repetitive burden of grading. By combining a robust exam management system with cutting-edge AI, we give educators back their most valuable resource: time.</p>
+                <p data-i18n="about_p2">Security, fairness and clarity are at the core of everything we build. Every result is transparent, every submission is protected, and every student receives feedback that helps them grow.</p>
+                <div class="about-features">
+                    <div class="about-check"><span>✓</span> <p data-i18n="about_c1">Secure JWT-based authentication &amp; role-based access</p></div>
+                    <div class="about-check"><span>✓</span> <p data-i18n="about_c2">Responsive, accessible &amp; beautiful on any device</p></div>
+                    <div class="about-check"><span>✓</span> <p data-i18n="about_c3">Fully bilingual — English &amp; French</p></div>
+                </div>
+            </div>
+
+            <div class="about-visual reveal">
+                <div class="collage">
+                    <img src="./assets/IMG-20260304-WA0028.jpg" alt="Education" class="col-l">
+                    <img src="./assets/IMG-20260318-WA0037.jpg" alt="Classroom" class="col-r">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag" data-i18n="test_tag">Testimonials</span>
+                <h2 class="section-title" data-i18n="test_title">Loved by educators</h2>
+                <p class="section-sub" data-i18n="test_sub">Here's what teachers say about managing exams with BELLO.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="quote-mark">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p data-i18n="test1_q">BELLO cut my grading time by 90%. The AI feedback is shockingly accurate and my students love the instant feedback.</p>
+                    <div class="testimonial-author">
+                        <span class="avatar a1">MR</span>
+                        <div>
+                            <strong>Dr. Maria Rossi</strong>
+                            <span data-i18n="test1_role">Physics Professor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="quote-mark">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p data-i18n="test2_q">The messaging feature is a game changer. I can reach my whole class or individual students instantly, all in one place.</p>
+                    <div class="testimonial-author">
+                        <span class="avatar a2">JL</span>
+                        <div>
+                            <strong>James Lee</strong>
+                            <span data-i18n="test2_role">High School Teacher</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="quote-mark">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p data-i18n="test3_q">The anti-cheat protection gives me total confidence in my exams. Setup took minutes and the dashboards are gorgeous.</p>
+                    <div class="testimonial-author">
+                        <span class="avatar a3">SK</span>
+                        <div>
+                            <strong>Sofia Khan</strong>
+                            <span data-i18n="test3_role">Dean of Academics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section section-alt" id="contact">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag" data-i18n="contact_tag">Contact</span>
+                <h2 class="section-title" data-i18n="contact_title">Get in touch</h2>
+                <p class="section-sub" data-i18n="contact_sub">Questions or a demo request? Reach the teacher, Dchoupe Fotie Valdese Jordan, directly below.</p>
+            </div>
+
+            <div class="contact-layout reveal">
+                <div class="contact-info">
+                    <div class="ci-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                        <div><strong data-i18n="ci_email_label">Email</strong><p>belloboris83@gmail.com</p></div>
+                    </div>
+                    <div class="ci-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                        <div><strong data-i18n="ci_loc_label">Location</strong><p data-i18n="ci_loc">Cameroon — online</p></div>
+                    </div>
+                    <div class="ci-item">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                        <div><strong data-i18n="ci_call_label">Phone</strong><p>+237 650240983</p></div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="c-name" data-i18n="cf_name">Full Name</label>
+                            <input type="text" id="c-name" required data-i18n-ph="cf_name_ph" placeholder="BELLO">
+                        </div>
+                        <div class="form-field">
+                            <label for="c-email" data-i18n="cf_email">Email Address</label>
+                            <input type="email" id="c-email" required data-i18n-ph="cf_email_ph" placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="c-subject" data-i18n="cf_subject">Subject</label>
+                        <input type="text" id="c-subject" required data-i18n-ph="cf_subject_ph" placeholder="How can we help?">
+                    </div>
+                    <div class="form-field">
+                        <label for="c-message" data-i18n="cf_message">Message</label>
+                        <textarea id="c-message" rows="5" required data-i18n-ph="cf_message_ph" placeholder="Write your message here…"></textarea>
+                    </div>
+                    <p class="form-status" id="form-status" role="status"></p>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block shine" id="contact-submit" data-i18n="cf_send">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="cta-band">
+        <div class="container cta-inner reveal">
+            <h2 data-i18n="cta_title">Ready to transform the way you teach?</h2>
+            <p data-i18n="cta_sub">Join thousands of educators using BELLO to save time and improve outcomes.</p>
+            <div class="cta-actions">
+                <a href="login.html" class="btn btn-primary btn-lg shine" data-i18n="cta_btn">Get Started — It's Free</a>
+                <a href="#contact" class="btn btn-ghost btn-lg" data-i18n="cta_btn2">Talk to Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="brand">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <span class="brand-name">BELLO</span>
+                </div>
+                <p class="footer-desc" data-i18n="footer_desc">The AI-powered exam management platform for modern educators and institutions.</p>
+                <div class="socials">
+                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+                    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_nav">Platform</h4>
+                <a href="#features" data-i18n="nav_features">Features</a>
+                <a href="#services" data-i18n="nav_services">Services</a>
+                <a href="#how" data-i18n="nav_how">How it works</a>
+                <a href="#about" data-i18n="nav_about">About</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_res">Resources</h4>
+                <a href="login.html" data-i18n="nav_login">Sign In</a>
+                <a href="#contact" data-i18n="footer_help">Help Center</a>
+                <a href="#contact" data-i18n="footer_support">Support</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_legal">Legal</h4>
+                <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="#" data-i18n="footer_terms">Terms of Service</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>© 2026 BELLO. <span data-i18n="footer_rights">All rights reserved.</span></p>
+            <p class="footer-status" id="health-status"></p>
+        </div>
+    </footer>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>

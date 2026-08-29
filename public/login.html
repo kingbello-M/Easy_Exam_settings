@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In · CUPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                        <path d="M12 2 2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <span class="brand-name">CUPE</span>
+            </a>
+            <div class="nav-actions">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <span class="lang-divider"></span>
+                    <button class="lang-btn" data-lang="fr">FR</button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <a href="index.html" class="btn btn-ghost btn-sm" data-i18n-nav="back">← Back to home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                        <path d="M12 2 2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <span class="brand-name">CUPE</span>
+            </div>
+            <h2 class="auth-title" id="form-title" data-i18n-auth="login">Welcome back</h2>
+            <p class="auth-sub" id="form-sub" data-i18n-auth="login_sub">Sign in to your account to continue</p>
+
+            <p id="form-status-msg" role="status"></p>
+
+            <form id="auth-form">
+                <div class="form-field" id="name-group" style="display: none;">
+                    <label for="full_name" data-i18n-auth="full_name">Full Name</label>
+                    <input type="text" id="full_name" data-i18n-ph="full_name_ph" placeholder="John Doe">
+                </div>
+
+                <div class="form-field">
+                    <label for="email" data-i18n-auth="email">Email Address</label>
+                    <input type="email" id="email" required data-i18n-ph="email_ph" placeholder="user@example.com">
+                </div>
+
+                <div class="form-field">
+                    <label for="password" data-i18n-auth="password">Password</label>
+                    <input type="password" id="password" required data-i18n-ph="password_ph" placeholder="••••••••">
+                </div>
+
+                <div class="form-field" id="role-group" style="display: none;">
+                    <label for="role" data-i18n-auth="role">Register as</label>
+                    <select id="role">
+                        <option value="student" data-i18n-opt="role_student">Student</option>
+                        <option value="manager" data-i18n-opt="role_manager">Teacher / Manager</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-btn" data-i18n-auth="login_btn">Sign In</button>
+            </form>
+
+            <p class="auth-toggle" id="auth-toggle-wrap">
+                <a href="#" id="toggle-auth" data-i18n-auth="toggle_login">Need an account? Register</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
