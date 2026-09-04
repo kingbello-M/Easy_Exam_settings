@@ -1,5 +1,9 @@
 require('dotenv').config();
+const cluster = require('cluster');
+const os = require('os');
 const express = require('express');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -7,11 +11,65 @@ const path = require('path');
 const PDFDocument = require('pdfkit');
 const { GoogleGenAI } = require('@google/genai');
 
-const app = express();
-app.use(express.json());
+const NUM_WORKERS = process.env.WEB_CONCURRENCY || os.cpus().length;
 
-// CORS: allow the dashboard pages to reach the API even when they are opened
-// directly from disk (file://) or from a different origin/port.
+if (cluster.isPrimary) {
+    console.log(`Primary ${process.pid} starting ${NUM_WORKERS} workers`);
+
+    for (let i = 0; i < NUM_WORKERS; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker) => {
+        console.error(`Worker ${worker.process.pid} died. Restarting...`);
+        cluster.fork();
+    });
+
+} else {
+    startServer();
+}
+
+function startServer() {
+const app = express();
+
+// Trust proxy (needed when behind reverse proxy like nginx)
+app.set('trust proxy', 1);
+
+// Security headers
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    next();
+});
+
+// HTTP compression — reduces response size by ~60-80%
+app.use(compression({
+    threshold: 1024,
+    level: 6,
+    filter: (req, res) => {
+        if (req.headers['x-no-compression']) return false;
+        return compression.filter(req, res);
+    }
+}));
+
+// Request logging
+app.use((req, res, next) => {
+    const start = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        if (req.path.startsWith('/api/')) {
+            console.log(`${req.method} ${req.path} ${res.statusCode} ${duration}ms [worker:${process.pid}]`);
+        }
+    });
+    next();
+});
+
+// Body parser with size limits (1MB max)
+app.use(express.json({ limit: '1mb' }));
+
+// CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -20,8 +78,38 @@ app.use((req, res, next) => {
     next();
 });
 
-// Serve the frontend from the public directory.
-app.use(express.static(path.join(__dirname, 'public')));
+// Static files with caching (1 day for HTML, 30 days for assets)
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: '1d',
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        } else if (filePath.match(/\.(css|js)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=604800'); // 7 days
+        } else if (filePath.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=2592000'); // 30 days
+        }
+    }
+}));
+
+// Rate limiting — protect auth endpoints from brute force
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 20, // 20 attempts per window
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: 'Too many attempts. Please try again after 15 minutes.' }
+});
+
+const apiLimiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 100, // 100 requests per minute per IP
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: 'Too many requests. Please slow down.' }
+});
 
 // ==================== AUTO-MIGRATION ====================
 // Ensure all database tables exist on startup so the app works
@@ -143,15 +231,20 @@ async function initDatabase() {
 // Initialize Gemini AI Client
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || 'dummy_key' });
 
-// MySQL Connection Pool
+// MySQL Connection Pool — tuned for 100+ concurrent users
 const db = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASS || '',
     database: process.env.DB_NAME || 'bello',
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 20,
+    maxIdle: 10,
+    idleTimeout: 60000,
+    queueLimit: 50,
+    connectTimeout: 10000,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0
 });
 
 // Convert a DateTime value (from an <input type="datetime-local">) into a
@@ -199,7 +292,7 @@ const requireRole = (role) => {
 
 // ==================== AUTH ROUTES ====================
 
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/auth/register', authLimiter, async (req, res) => {
     const { full_name, email, password, role } = req.body;
 
     if (!full_name || !email || !password) {
@@ -232,7 +325,7 @@ app.post('/api/auth/register', async (req, res) => {
     }
 });
 
-app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth/login', authLimiter, async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -267,7 +360,7 @@ app.post('/api/auth/login', async (req, res) => {
 
 // ==================== CONTACT ROUTES ====================
 
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', apiLimiter, async (req, res) => {
     const { name, email, subject, message } = req.body;
 
     if (!name || !email || !message) {
@@ -1058,8 +1151,26 @@ app.get('*splat', (req, res) => {
 
 // Start Server
 const PORT = process.env.PORT || 3000;
+
+// Graceful shutdown
+let server;
+function shutdown(signal) {
+    console.log(`Worker ${process.pid} received ${signal}. Shutting down gracefully...`);
+    if (server) {
+        server.close(() => {
+            db.end().then(() => process.exit(0)).catch(() => process.exit(1));
+        });
+    }
+    // Force close after 10 seconds
+    setTimeout(() => process.exit(1), 10000);
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
+
 initDatabase().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server running at http://localhost:${PORT}`);
+    server = app.listen(PORT, () => {
+        console.log(`Worker ${process.pid} ready on port ${PORT}`);
     });
 });
+
+} // end startServer
