@@ -1,6 +1,4 @@
 require('dotenv').config();
-const cluster = require('cluster');
-const os = require('os');
 const express = require('express');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
@@ -11,25 +9,6 @@ const path = require('path');
 const PDFDocument = require('pdfkit');
 const { GoogleGenAI } = require('@google/genai');
 
-const NUM_WORKERS = process.env.WEB_CONCURRENCY || os.cpus().length;
-
-if (cluster.isPrimary) {
-    console.log(`Primary ${process.pid} starting ${NUM_WORKERS} workers`);
-
-    for (let i = 0; i < NUM_WORKERS; i++) {
-        cluster.fork();
-    }
-
-    cluster.on('exit', (worker) => {
-        console.error(`Worker ${worker.process.pid} died. Restarting...`);
-        cluster.fork();
-    });
-
-} else {
-    startServer();
-}
-
-function startServer() {
 const app = express();
 
 // Trust proxy (needed when behind reverse proxy like nginx)
@@ -1171,22 +1150,47 @@ const PORT = process.env.PORT || 3000;
 // Graceful shutdown
 let server;
 function shutdown(signal) {
-    console.log(`Worker ${process.pid} received ${signal}. Shutting down gracefully...`);
+    console.log(`Received ${signal}. Shutting down gracefully...`);
     if (server) {
         server.close(() => {
             db.end().then(() => process.exit(0)).catch(() => process.exit(1));
         });
     }
-    // Force close after 10 seconds
     setTimeout(() => process.exit(1), 10000);
 }
-process.on('SIGTERM', () => shutdown('SIGTERM'));
-process.on('SIGINT', () => shutdown('SIGINT'));
 
-initDatabase().then(() => {
-    server = app.listen(PORT, () => {
-        console.log(`Worker ${process.pid} ready on port ${PORT}`);
+const isVercel = process.env.VERCEL === '1';
+
+if (isVercel) {
+    // Vercel: export app, init DB on first request
+    let dbReady = false;
+    app.use(async (req, res, next) => {
+        if (!dbReady) {
+            try { await initDatabase(); dbReady = true; } catch (e) { /* ignore */ }
+        }
+        next();
     });
-});
+    module.exports = app;
+} else {
+    // Traditional hosting: cluster + listen
+    const cluster = require('cluster');
+    const os = require('os');
+    const NUM_WORKERS = process.env.WEB_CONCURRENCY || os.cpus().length;
 
-} // end startServer
+    if (cluster.isPrimary) {
+        console.log(`Primary ${process.pid} starting ${NUM_WORKERS} workers`);
+        for (let i = 0; i < NUM_WORKERS; i++) cluster.fork();
+        cluster.on('exit', (worker) => {
+            console.error(`Worker ${worker.process.pid} died. Restarting...`);
+            cluster.fork();
+        });
+    } else {
+        process.on('SIGTERM', () => shutdown('SIGTERM'));
+        process.on('SIGINT', () => shutdown('SIGINT'));
+        initDatabase().then(() => {
+            server = app.listen(PORT, () => {
+                console.log(`Worker ${process.pid} ready on port ${PORT}`);
+            });
+        });
+    }
+}
