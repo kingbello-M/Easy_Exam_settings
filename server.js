@@ -112,9 +112,25 @@ const apiLimiter = rateLimit({
 });
 
 // ==================== AUTO-MIGRATION ====================
-// Ensure all database tables exist on startup so the app works
+// Ensure the database and all tables exist on startup so the app works
 // immediately after deployment without manually running schema.sql.
 async function initDatabase() {
+    // Create database if it doesn't exist
+    try {
+        const dbName = process.env.DB_NAME || 'cupe';
+        const tempPool = mysql.createPool({
+            host: process.env.DB_HOST || 'localhost',
+            user: process.env.DB_USER || 'root',
+            password: process.env.DB_PASS || '',
+            waitForConnections: true,
+            connectionLimit: 2
+        });
+        await tempPool.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
+        await tempPool.end();
+    } catch (err) {
+        console.error('Database creation error:', err.message);
+    }
+
     const tables = [
         `CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -236,7 +252,7 @@ const db = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASS || '',
-    database: process.env.DB_NAME || 'bello',
+    database: process.env.DB_NAME || 'cupe',
     waitForConnections: true,
     connectionLimit: 20,
     maxIdle: 10,
@@ -1070,7 +1086,7 @@ app.get('/api/student/my-results', authenticateToken, requireRole('student'), as
 app.get('/api/health', async (req, res) => {
     try {
         await db.query('SELECT 1');
-        res.json({ ok: true, database: process.env.DB_NAME || 'bello' });
+        res.json({ ok: true, database: process.env.DB_NAME || 'cupe' });
     } catch (error) {
         console.error('Database health check failed:', error);
         res.status(503).json({ ok: false, message: 'Database connection unavailable.' });
