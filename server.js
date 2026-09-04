@@ -23,6 +23,123 @@ app.use((req, res, next) => {
 // Serve the frontend from the public directory.
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ==================== AUTO-MIGRATION ====================
+// Ensure all database tables exist on startup so the app works
+// immediately after deployment without manually running schema.sql.
+async function initDatabase() {
+    const tables = [
+        `CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            full_name VARCHAR(100) NOT NULL,
+            email VARCHAR(150) NOT NULL UNIQUE,
+            password_hash VARCHAR(255) NOT NULL,
+            role ENUM('student', 'manager') NOT NULL DEFAULT 'student',
+            status ENUM('pending', 'approved') NOT NULL DEFAULT 'pending',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS contact_messages (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NULL,
+            name VARCHAR(100) NOT NULL,
+            email VARCHAR(150) NOT NULL,
+            subject VARCHAR(255) DEFAULT '',
+            message TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS exams (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            duration_minutes INT NOT NULL DEFAULT 30,
+            start_time DATETIME NULL,
+            end_time DATETIME NULL,
+            is_active BOOLEAN NOT NULL DEFAULT TRUE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS questions (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            exam_id INT NOT NULL,
+            question_text TEXT NOT NULL,
+            question_type ENUM('multiple_choice', 'structural') NOT NULL DEFAULT 'multiple_choice',
+            option_a VARCHAR(255) DEFAULT NULL,
+            option_b VARCHAR(255) DEFAULT NULL,
+            option_c VARCHAR(255) DEFAULT NULL,
+            option_d VARCHAR(255) DEFAULT NULL,
+            correct_answer TEXT NOT NULL,
+            points INT NOT NULL DEFAULT 1,
+            CONSTRAINT fk_question_exam FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS submissions (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            exam_id INT NOT NULL,
+            student_id INT NOT NULL,
+            mcq_score INT DEFAULT 0,
+            structural_score INT DEFAULT 0,
+            total_score INT DEFAULT 0,
+            ai_feedback TEXT,
+            submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT fk_sub_exam FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
+            CONSTRAINT fk_sub_student FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE KEY uq_submission (exam_id, student_id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS student_answers (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            submission_id INT NOT NULL,
+            question_id INT NOT NULL,
+            student_response TEXT,
+            is_correct BOOLEAN DEFAULT NULL,
+            ai_analysis TEXT,
+            CONSTRAINT fk_answer_submission FOREIGN KEY (submission_id) REFERENCES submissions(id) ON DELETE CASCADE,
+            CONSTRAINT fk_answer_question FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS published_results (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            exam_id INT NOT NULL UNIQUE,
+            is_published BOOLEAN NOT NULL DEFAULT FALSE,
+            published_at TIMESTAMP NULL DEFAULT NULL,
+            CONSTRAINT fk_publish_exam FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS exam_security_logs (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            submission_id INT NOT NULL,
+            ip_address VARCHAR(45) DEFAULT NULL,
+            user_agent TEXT,
+            tab_switch_count INT DEFAULT 0,
+            flagged_suspicious BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT fk_security_submission FOREIGN KEY (submission_id) REFERENCES submissions(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS messages (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            sender_id INT NOT NULL,
+            subject VARCHAR(255) NOT NULL,
+            body TEXT NOT NULL,
+            is_broadcast TINYINT(1) DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT fk_msg_sender FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+        `CREATE TABLE IF NOT EXISTS message_recipients (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            message_id INT NOT NULL,
+            recipient_id INT NOT NULL,
+            is_read TINYINT(1) DEFAULT 0,
+            read_at TIMESTAMP NULL DEFAULT NULL,
+            CONSTRAINT fk_recip_msg FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE,
+            CONSTRAINT fk_recip_user FOREIGN KEY (recipient_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE KEY uq_recip (message_id, recipient_id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`
+    ];
+
+    try {
+        for (const sql of tables) {
+            await db.query(sql);
+        }
+        console.log('Database tables verified.');
+    } catch (err) {
+        console.error('Database migration error:', err.message);
+    }
+}
+
 // Initialize Gemini AI Client
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || 'dummy_key' });
 
@@ -31,7 +148,7 @@ const db = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASS || '',
-    database: process.env.DB_NAME || 'cupe',
+    database: process.env.DB_NAME || 'bello',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -159,7 +276,7 @@ app.post('/api/contact', async (req, res) => {
 
     try {
         await db.query(
-            'INSERT INTO contact_messages (sender_name, sender_email, subject, message) VALUES (?, ?, ?, ?)',
+            'INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)',
             [name, email, subject || '', message]
         );
         res.status(201).json({ message: 'Message sent successfully.' });
@@ -217,10 +334,10 @@ app.get('/api/teacher/results/pdf', authenticateToken, requireRole('manager'), a
         sql += ' ORDER BY e.title ASC, u.full_name ASC';
         const [results] = await db.query(sql, params);
 
-        let title = 'CUPE - Examination Results';
+        let title = 'BELLO - Examination Results';
         if (filterExam) {
             const [examRows] = await db.query('SELECT title FROM exams WHERE id = ?', [filterExam]);
-            if (examRows.length) title = 'CUPE - ' + examRows[0].title + ' Results';
+            if (examRows.length) title = 'BELLO - ' + examRows[0].title + ' Results';
         }
 
         const filename = 'results-report-' + new Date().toISOString().slice(0, 10) + '.pdf';
@@ -238,7 +355,7 @@ app.get('/api/teacher/results/pdf', authenticateToken, requireRole('manager'), a
         const pageWidth = doc.page.width - 96;
 
         doc.rect(0, 0, doc.page.width, 78).fill('#2563eb');
-        doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(18).text('CUPE Academic Portal', 48, 24);
+        doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(18).text('BELLO Academic Portal', 48, 24);
         doc.font('Helvetica').fontSize(11).text('Examination Results Report', 48, 48);
         doc.font('Helvetica-Bold').fontSize(13).fillColor('#111827')
             .text(title, 48, 100, { width: pageWidth });
@@ -860,7 +977,7 @@ app.get('/api/student/my-results', authenticateToken, requireRole('student'), as
 app.get('/api/health', async (req, res) => {
     try {
         await db.query('SELECT 1');
-        res.json({ ok: true, database: process.env.DB_NAME || 'cupe' });
+        res.json({ ok: true, database: process.env.DB_NAME || 'bello' });
     } catch (error) {
         console.error('Database health check failed:', error);
         res.status(503).json({ ok: false, message: 'Database connection unavailable.' });
@@ -941,6 +1058,8 @@ app.get('*splat', (req, res) => {
 
 // Start Server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+initDatabase().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
 });

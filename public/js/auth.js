@@ -1,5 +1,5 @@
 /* ============================================================
-   CUPE Platform — Login / Registration logic + theme & i18n
+   BELLO Platform — Login / Registration logic + theme & i18n
    ============================================================ */
 
 (function () {
@@ -20,7 +20,7 @@
             role_student: "Student",
             role_manager: "Teacher / Manager",
             register: "Create your account",
-            register_sub: "Join the CUPE platform",
+            register_sub: "Join the BELLO platform",
             login_btn: "Sign In",
             register_btn: "Create Account",
             toggle_login: "Need an account? Register",
@@ -44,7 +44,7 @@
             role_student: "Étudiant",
             role_manager: "Enseignant / Gestionnaire",
             register: "Créez votre compte",
-            register_sub: "Rejoignez la plateforme CUPE",
+            register_sub: "Rejoignez la plateforme BELLO",
             login_btn: "Se connecter",
             register_btn: "Créer un compte",
             toggle_login: "Besoin d'un compte ? S'inscrire",
@@ -66,7 +66,7 @@
     const API_BASE = window.location.protocol === "file:" ? "http://localhost:3000" : "";
 
     function storedLang() {
-        return localStorage.getItem("cupe_lang") || "en";
+        return localStorage.getItem("bello_lang") || "en";
     }
 
     function applyI18n(lang) {
@@ -86,12 +86,12 @@
             b.classList.toggle("active", b.dataset.lang === lang)
         );
         document.documentElement.lang = lang;
-        localStorage.setItem("cupe_lang", lang);
+        localStorage.setItem("bello_lang", lang);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         // Theme
-        const savedTheme = localStorage.getItem("cupe_theme");
+        const savedTheme = localStorage.getItem("bello_theme");
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         document.documentElement.setAttribute("data-theme", savedTheme || (prefersDark ? "dark" : "light"));
         const toggle = document.getElementById("theme-toggle");
@@ -99,7 +99,7 @@
             toggle.addEventListener("click", () => {
                 const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
                 document.documentElement.setAttribute("data-theme", next);
-                localStorage.setItem("cupe_theme", next);
+                localStorage.setItem("bello_theme", next);
             });
         }
 
@@ -167,8 +167,15 @@
                 selectedRole = payload.role;
             }
 
-            if (isLogin && (!email || !password)) {
+            if (!email || !password) {
                 setStatus(t("err_generic", lang), "error");
+                submitBtn.disabled = false;
+                return;
+            }
+
+            if (!isLogin && !payload.full_name) {
+                setStatus(t("err_generic", lang), "error");
+                submitBtn.disabled = false;
                 return;
             }
 

@@ -1,11 +1,11 @@
 -- =============================================================
 -- Teacher Portal & Exam Management System - Database Schema
--- Database Name: cupe
+-- Database Name: bello
 -- Run: mysql -u root -p cupe < schema.sql
 -- =============================================================
 
-CREATE DATABASE IF NOT EXISTS cupe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE cupe;
+CREATE DATABASE IF NOT EXISTS bello CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE bello;
 
 -- 1. Users (Manager / Teacher & Students)
 CREATE TABLE IF NOT EXISTS users (

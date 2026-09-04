@@ -1,5 +1,5 @@
 /* ============================================================
-   CUPE Platform — Student portal logic
+   BELLO Platform — Student portal logic
    Exams (professional in-page taking) · Results · Inbox
    ============================================================ */
 
@@ -41,7 +41,7 @@
         }
     };
 
-    let lang = localStorage.getItem("cupe_lang") || "en";
+    let lang = localStorage.getItem("bello_lang") || "en";
     const t = (k) => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
     const token = localStorage.getItem("token");
     const API_BASE = window.location.protocol === "file:" ? "http://localhost:3000" : "";
@@ -110,13 +110,13 @@
     }
 
     function initTheme() {
-        const saved = localStorage.getItem("cupe_theme");
+        const saved = localStorage.getItem("bello_theme");
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         document.documentElement.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
         document.getElementById("theme-toggle").addEventListener("click", () => {
             const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", next);
-            localStorage.setItem("cupe_theme", next);
+            localStorage.setItem("bello_theme", next);
         });
     }
 
@@ -318,7 +318,7 @@
         applyLang();
 
         document.querySelectorAll(".lang-btn").forEach((b) => b.addEventListener("click", () => {
-            lang = b.dataset.lang; localStorage.setItem("cupe_lang", lang); applyLang(); loadExams(); loadResults(); loadInbox();
+            lang = b.dataset.lang; localStorage.setItem("bello_lang", lang); applyLang(); loadExams(); loadResults(); loadInbox();
         }));
 
         document.getElementById("logout-btn").addEventListener("click", () => {

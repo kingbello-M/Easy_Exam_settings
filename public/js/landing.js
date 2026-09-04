@@ -1,5 +1,5 @@
 /* ============================================================
-   CUPE Platform — Landing page logic
+   BELLO Platform — Landing page logic
    Theme toggle · Language switching (EN/FR) · Animations · Contact
    ============================================================ */
 
@@ -19,7 +19,7 @@
 
             hero_badge: "Powered by Artificial Intelligence",
             hero_title: "The Smarter Way to Manage & Grade Exams",
-            hero_subtitle: "CUPE is an AI-powered exam management platform for educators. Create exams, enroll students, chat with your class, and let artificial intelligence grade every answer with instant, personalized feedback.",
+            hero_subtitle: "BELLO is an AI-powered exam management platform for educators. Create exams, enroll students, chat with your class, and let artificial intelligence grade every answer with instant, personalized feedback.",
             hero_cta: "Get Started Free",
             hero_cta2: "See How It Works",
             hero_win: "BELLO · Live Dashboard",
@@ -39,7 +39,7 @@
 
             features_tag: "Features",
             features_title: "Everything you need to run exams effortlessly",
-            features_sub: "From exam creation to AI grading and student messaging, CUPE automates the entire assessment lifecycle.",
+            features_sub: "From exam creation to AI grading and student messaging, BELLO automates the entire assessment lifecycle.",
             f1_t: "AI Auto-Grading",
             f1_d: "Structural and multiple-choice answers evaluated automatically by Google Gemini with rich diagnostic feedback for every student.",
             f2_t: "Anti-Cheat Security",
@@ -76,9 +76,9 @@
             s3_t: "AI Grades & Publishes",
             s3_d: "One click distributes results. Every answer is graded by AI and personalized feedback is delivered instantly.",
 
-            about_tag: "About CUPE",
+            about_tag: "About BELLO",
             about_title: "Built for modern educators",
-            about_p1: "CUPE was created to free teachers from the repetitive burden of grading. By combining a robust exam management system with cutting-edge AI, we give educators back their most valuable resource: time.",
+            about_p1: "BELLO was created to free teachers from the repetitive burden of grading. By combining a robust exam management system with cutting-edge AI, we give educators back their most valuable resource: time.",
             about_p2: "Security, fairness and clarity are at the core of everything we build. Every result is transparent, every submission is protected, and every student receives feedback that helps them grow.",
             about_c1: "Secure JWT-based authentication & role-based access",
             about_c2: "Responsive, accessible & beautiful on any device",
@@ -86,8 +86,8 @@
 
             test_tag: "Testimonials",
             test_title: "Loved by educators",
-            test_sub: "Here's what teachers say about managing exams with CUPE.",
-            test1_q: "CUPE cut my grading time by 90%. The AI feedback is shockingly accurate and my students love the instant feedback.",
+            test_sub: "Here's what teachers say about managing exams with BELLO.",
+            test1_q: "BELLO cut my grading time by 90%. The AI feedback is shockingly accurate and my students love the instant feedback.",
             test1_role: "Physics Professor",
             test2_q: "The messaging feature is a game changer. I can reach my whole class or individual students instantly, all in one place.",
             test2_role: "High School Teacher",
@@ -115,7 +115,7 @@
             cf_error: "Something went wrong. Please try again.",
 
             cta_title: "Ready to transform the way you teach?",
-            cta_sub: "Join thousands of educators using CUPE to save time and improve outcomes.",
+            cta_sub: "Join thousands of educators using BELLO to save time and improve outcomes.",
             cta_btn: "Get Started — It's Free",
             cta_btn2: "Talk to Sales",
 
@@ -143,7 +143,7 @@
 
             hero_badge: "Propulsé par l'Intelligence Artificielle",
             hero_title: "La façon intelligente de gérer et noter vos examens",
-            hero_subtitle: "CUPE est une plateforme de gestion d'examens alimentée par l'IA pour les enseignants. Créez des examens, inscrivez des étudiants, discutez avec votre classe et laissez l'IA noter chaque réponse avec un retour personnalisé instantané.",
+            hero_subtitle: "BELLO est une plateforme de gestion d'examens alimentée par l'IA pour les enseignants. Créez des examens, inscrivez des étudiants, discutez avec votre classe et laissez l'IA noter chaque réponse avec un retour personnalisé instantané.",
             hero_cta: "Commencer Gratuitement",
             hero_cta2: "Voir comment ça marche",
             hero_win: "BELLO · Tableau de bord en direct",
@@ -163,7 +163,7 @@
 
             features_tag: "Fonctionnalités",
             features_title: "Tout ce qu'il vous faut pour gérer vos examens sans effort",
-            features_sub: "De la création d'examens à la notation IA et à la messagerie étudiante, CUPE automatise tout le cycle d'évaluation.",
+            features_sub: "De la création d'examens à la notation IA et à la messagerie étudiante, BELLO automatise tout le cycle d'évaluation.",
             f1_t: "Notation automatique par IA",
             f1_d: "Les réponses structurées et à choix multiples sont évaluées automatiquement par Google Gemini avec un retour diagnostique détaillé pour chaque étudiant.",
             f2_t: "Sécurité anti-triche",
@@ -200,9 +200,9 @@
             s3_t: "L'IA note et publie",
             s3_d: "Un clic distribue les résultats. Chaque réponse est notée par l'IA et un retour personnalisé est livré instantanément.",
 
-            about_tag: "À propos de CUPE",
+            about_tag: "À propos de BELLO",
             about_title: "Conçu pour les éducateurs modernes",
-            about_p1: "CUPE a été créé pour libérer les enseignants de la charge répétitive de la correction. En combinant un système robuste de gestion d'examens avec une IA de pointe, nous redonnons aux éducateurs leur ressource la plus précieuse : le temps.",
+            about_p1: "BELLO a été créé pour libérer les enseignants de la charge répétitive de la correction. En combinant un système robuste de gestion d'examens avec une IA de pointe, nous redonnons aux éducateurs leur ressource la plus précieuse : le temps.",
             about_p2: "Sécurité, équité et clarté sont au cœur de tout ce que nous construisons. Chaque résultat est transparent, chaque soumission est protégée, et chaque étudiant reçoit un retour qui l'aide à progresser.",
             about_c1: "Authentification sécurisée JWT et accès par rôle",
             about_c2: "Responsive, accessible et élégant sur tous les appareils",
@@ -210,8 +210,8 @@
 
             test_tag: "Témoignages",
             test_title: "Apprécié par les éducateurs",
-            test_sub: "Voici ce que les enseignants disent de la gestion d'examens avec CUPE.",
-            test1_q: "CUPE a réduit mon temps de correction de 90%. Le retour IA est étonnamment précis et mes étudiants adorent le retour instantané.",
+            test_sub: "Voici ce que les enseignants disent de la gestion d'examens avec BELLO.",
+            test1_q: "BELLO a réduit mon temps de correction de 90%. Le retour IA est étonnamment précis et mes étudiants adorent le retour instantané.",
             test1_role: "Professeur de physique",
             test2_q: "La fonction de messagerie change tout. Je peux atteindre toute ma classe ou des étudiants individuellement, en un seul endroit.",
             test2_role: "Enseignant au lycée",
@@ -239,7 +239,7 @@
             cf_error: "Une erreur est survenue. Veuillez réessayer.",
 
             cta_title: "Prêt à transformer votre façon d'enseigner ?",
-            cta_sub: "Rejoignez des milliers d'éducateurs qui utilisent CUPE pour gagner du temps et améliorer les résultats.",
+            cta_sub: "Rejoignez des milliers d'éducateurs qui utilisent BELLO pour gagner du temps et améliorer les résultats.",
             cta_btn: "Commencer — C'est gratuit",
             cta_btn2: "Parler à l'équipe",
 
@@ -278,12 +278,12 @@
             btn.classList.toggle("active", btn.dataset.lang === lang);
         });
 
-        localStorage.setItem("cupe_lang", lang);
+        localStorage.setItem("bello_lang", lang);
     }
 
     /* ---------------- Theme ---------------- */
     function initTheme() {
-        const saved = localStorage.getItem("cupe_theme");
+        const saved = localStorage.getItem("bello_theme");
         const prefersDark = window.matchMedia &&
             window.matchMedia("(prefers-color-scheme: dark)").matches;
         const theme = saved || (prefersDark ? "dark" : "light");
@@ -295,7 +295,7 @@
                 const current = document.documentElement.getAttribute("data-theme");
                 const next = current === "dark" ? "light" : "dark";
                 document.documentElement.setAttribute("data-theme", next);
-                localStorage.setItem("cupe_theme", next);
+                localStorage.setItem("bello_theme", next);
             });
         }
     }
@@ -381,7 +381,7 @@
     /* ---------------- Health check ---------------- */
     async function initHealth() {
         const statusEl = document.getElementById("health-status");
-        const lang = localStorage.getItem("cupe_lang") || DEFAULT_LANG;
+        const lang = localStorage.getItem("bello_lang") || DEFAULT_LANG;
         const dict = I18N[lang] || I18N[DEFAULT_LANG];
         if (!statusEl) return;
         try {
@@ -409,7 +409,7 @@
             e.preventDefault();
             const status = document.getElementById("form-status");
             const submitBtn = document.getElementById("contact-submit");
-            const lang = localStorage.getItem("cupe_lang") || DEFAULT_LANG;
+        const lang = localStorage.getItem("bello_lang") || DEFAULT_LANG;
             const dict = I18N[lang] || I18N[DEFAULT_LANG];
 
             const payload = {
@@ -463,7 +463,7 @@
         });
 
         // Apply saved language on load
-        const stored = localStorage.getItem("cupe_lang") || DEFAULT_LANG;
+        const stored = localStorage.getItem("bello_lang") || DEFAULT_LANG;
         applyI18n(I18N[stored] ? stored : DEFAULT_LANG);
     });
 })();
